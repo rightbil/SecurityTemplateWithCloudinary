@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="user: ${users}">
+    Email Address :<span th:text="${user.email}"></span><br/>
+    First Name:<span th:text="${user.firstName}"></span><br/>
+    LastName :<span th:text="${user.lastName}"></span><br/>
+    UserName <span th:text="${user.username}"></span><br/>
+    Passworrd <span th:text="${user.password}"></span><br/>
+
+    <div th:each="currentRole: ${user.roles}">
+        Role: <span th:text="${currentRole.role}"></span>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>
+
+
+
+
+

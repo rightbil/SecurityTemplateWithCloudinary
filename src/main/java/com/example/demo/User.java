@@ -3,7 +3,9 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "User_Data")
@@ -11,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
     @Column(name = "password")
     private String password;
@@ -19,11 +21,14 @@ public class User {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "enabled")
-    private boolean enabled;
     @Column(name = "username")
     private String username;
+//   relationship with post
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
+    private Collection<Post> posts;
+
+    /*relationship with role */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -37,8 +42,8 @@ public class User {
         this.setPassword(password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
-        this.setEnabled(enabled);
         this.setUsername(username);
+        this.setRoles(Arrays.asList(new Role("ADMIN")));
     }
 
     public long getId() {
@@ -84,13 +89,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     public String getUsername() {
         return username;
