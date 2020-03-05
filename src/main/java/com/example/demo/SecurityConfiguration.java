@@ -16,7 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
@@ -28,15 +27,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public UserDetailsService userDetailsServiceBean() throws Exception {
-
         return new SSUserDetailsService(userRepository);
-
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "h2-console/**").permitAll()
+                .antMatchers("/user")
+                .access("hasAnyAuthority('ADMIN','USER')")
                 .antMatchers("/admin")
                 .access("hasAuthority('ADMIN')")
                 .anyRequest()

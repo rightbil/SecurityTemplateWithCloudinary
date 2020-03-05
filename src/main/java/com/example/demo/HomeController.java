@@ -13,23 +13,31 @@ public class HomeController {
 
     @Autowired
     UserRepository userRepository;
-    @RequestMapping("/secure")
-    public String secure(Principal principal, Model model) {
 
-        String username = principal.getName();
-        model.addAttribute("user", userRepository.findByUsername(username));
-        return "secure";
-    }
     @RequestMapping("/")
     public String index() {
 
         return "index";
     }
+
+
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
+    @RequestMapping("/admin")
+    public String admin(Principal principal, Model model) {
+        String username = principal.getName();
+        model.addAttribute("user", userRepository.findByUsername(username));
+        return "admin";
+    }
+
+
+    @RequestMapping("/user")
+    public String user() {
+        return "user";
+    }
 
 
 }
