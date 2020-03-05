@@ -73,7 +73,7 @@ public class HomeController {
 
     //TODO: DetailUser
 
-    @RequestMapping("/listCars")
+    @RequestMapping("/detailUser")
     public String listCars(Model model) {
         model.addAttribute("user", userRepository.findAll());
         return "userdetail";
@@ -87,7 +87,7 @@ public class HomeController {
     }
 
     //TODO: UpdatePosts
-    @RequestMapping("/updateCar/{id}")
+    @RequestMapping("/updatePost/{id}")
     public String upateCar(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userRepository.findById(id).get());
         model.addAttribute("post", postRepository.findAll());

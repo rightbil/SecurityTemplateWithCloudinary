@@ -29,37 +29,13 @@
 
 <div class="container">
     <h2 class="text-center">Messages </h2>
-    <table class="table table-borderless table-hover table-responsive" th:each="p: ${posts}">
-
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>User</th>
-                <th>Admin</th>
-            </tr>
-
-            <tr>
-                <td th:inline="text">[[${p.title}]]</td>
-                <td th:each="u : ${p.user}">
-                    [[${p.firstName}]]</td>
-                <td th:inline="text"><a th:href="@{/detailPost/{id} (id= ${a.id})}">Detail</a></td>
-                <td th:inline="text"><a th:href="@{/deletePost/{id} (id= ${a.id})}">Delete</a></td>
-                <td th:inline="text"><a th:href="@{/updatePost/{id} (id= ${a.id})}">Update</a></td>
-            </tr>
-            <br>
-        </table>
+    <div th:each="u: ${users}">
+        First Name:<span th:text="${u.firstName}"></span><br/>
+        LastName :<span th:text="${u.lastName}"></span><br/>
+        Email Address :<span th:text="${u.email}"></span><br/>
         <hr/>
-
-
-
-
-
-
-    </table>
+    <div>
 </div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
